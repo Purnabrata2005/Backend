@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 
+import helthCheck from "./routes/healthcheck.routes.js";
+
 const app = express();
 
 app.use(
@@ -11,7 +13,11 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use(express.json())
 
-export default app
+app.use("/api/v1/healthcheck", helthCheck);
+
+
+export default app;
